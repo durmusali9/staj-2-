@@ -13,6 +13,8 @@ import ReportView from './pages/ReportView';
 import AdvisorPanel from './pages/AdvisorPanel';
 import Statistics from './pages/Statistics';
 import PDFExport from './pages/PDFExport';
+import AdminLogin from './pages/AdminLogin';
+import AdminPanel from './pages/AdminPanel';
 
 function App() {
   return (
@@ -22,14 +24,16 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<AdminLogin />} />
             
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/rapor-yaz" element={<ProtectedRoute role="ogrenci"><ReportWrite /></ProtectedRoute>} />
-              <Route path="/rapor-yaz/:id" element={<ProtectedRoute role="ogrenci"><ReportWrite /></ProtectedRoute>} />
+              <Route path="/rapor-yaz" element={<ProtectedRoute allowedRoles={['ogrenci']}><ReportWrite /></ProtectedRoute>} />
+              <Route path="/rapor-yaz/:id" element={<ProtectedRoute allowedRoles={['ogrenci']}><ReportWrite /></ProtectedRoute>} />
               <Route path="/rapor/:id" element={<ProtectedRoute><ReportView /></ProtectedRoute>} />
-              <Route path="/danisman" element={<ProtectedRoute role="danisman"><AdvisorPanel /></ProtectedRoute>} />
+              <Route path="/danisman" element={<ProtectedRoute allowedRoles={['danisman']}><AdvisorPanel /></ProtectedRoute>} />
               <Route path="/istatistikler" element={<ProtectedRoute><Statistics /></ProtectedRoute>} />
+              <Route path="/admin/panel" element={<ProtectedRoute allowedRoles={['admin']}><AdminPanel /></ProtectedRoute>} />
               <Route path="/pdf-export" element={<ProtectedRoute><PDFExport /></ProtectedRoute>} />
             </Route>
           </Routes>

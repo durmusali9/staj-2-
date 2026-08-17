@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { HiHome, HiDocumentText, HiPencil, HiUserGroup, HiChartBar, HiDocumentDownload, HiMenu, HiX, HiLogout } from 'react-icons/hi';
+import { HiHome, HiPencil, HiUserGroup, HiChartBar, HiDocumentDownload, HiMenu, HiX, HiLogout, HiShieldCheck } from 'react-icons/hi';
 
 const Sidebar = () => {
-  const { isOgrenci, isDanisman, logout } = useContext(AuthContext);
+  const { user, isOgrenci, isDanisman, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -72,6 +72,12 @@ const Sidebar = () => {
           {isDanisman && (
             <NavLink to="/danisman" style={navLinkStyle}>
               <HiUserGroup size={20} /> Danışman Paneli
+            </NavLink>
+          )}
+          
+          {user?.rol === 'admin' && (
+            <NavLink to="/admin/panel" style={navLinkStyle}>
+              <HiShieldCheck size={20} /> Admin Paneli
             </NavLink>
           )}
           

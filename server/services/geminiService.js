@@ -1,8 +1,8 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'dummy_key');
+const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || 'dummy_key' });
 
 // Fallback analiz fonksiyonu (API anahtarı yoksa veya hata olursa)
 const fallbackAnalyze = (report) => {
@@ -66,8 +66,6 @@ export const analyzeReport = async(report, previousReports) => {
             return fallbackAnalyze(report);
         }
 
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' }); // Veya gemini-pro
-
         const previousReportsText = previousReports && previousReports.length > 0 ?
             previousReports.map((r, i) => `Rapor ${i+1}: ${r.icerik.bugunNeYaptin}`).join(' | ') :
             'Yok';
@@ -104,9 +102,12 @@ Aşağıdaki JSON formatında yanıt ver (başka hiçbir şey yazma, sadece JSON
 - Önceki raporlarla çok benzer mi (copy-paste)?
     `;
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = response.text();
+        const result = await genAI.models.generateContent({
+            model: 'gemini-3.6-flash',
+            contents: prompt,
+        });
+
+        let text = result.text;
 
         // JSON parse hatalarını önlemek için temizlik
         text = text.replace(/```json/g, '').replace(/```/g, '').trim();

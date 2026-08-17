@@ -12,8 +12,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     setError('');
+    setIsLoading(true);
     
     try {
       await login(email, sifre);
@@ -68,13 +68,13 @@ const Login = () => {
         </form>
 
         <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-          Hesabınız yok mu? <Link to="/register" style={{ color: '#8b5cf6', textDecoration: 'none', fontWeight: 600 }}>Kayıt Ol</Link>
+          Hesabınız yok mu? <Link to="/register" style={{ color: '#8b5cf6', textDecoration: 'none', fontWeight: 600 }}>Kayıt Ol</Link> 
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '1rem', padding: '0.75rem', background: 'rgba(99, 102, 241, 0.05)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(99, 102, 241, 0.1)' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
-            Demo: <strong>ogrenci@test.com</strong> / <strong>123456</strong><br/>
-            Danışman: <strong>danisman@test.com</strong> / <strong>123456</strong>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>
+            Öğrenci: <strong>ogrenci@test.com</strong> / <strong>123456</strong><br/>
+            Danışman: <strong>danisman@test.com</strong> / <strong>123456</strong><br/>
           </p>
         </div>
       </div>
