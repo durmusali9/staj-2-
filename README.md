@@ -144,14 +144,7 @@ npm install
 
 `server/` dizininde `.env` dosyası oluşturun:
 
-```env
-MONGO_URI=mongodb+srv://<kullanici_adi>:<sifre>@cluster.mongodb.net/staj_rapor?retryWrites=true&w=majority
-JWT_SECRET=guclu_bir_jwt_secret_anahtari
-GEMINI_API_KEY=gemini_api_anahtariniz
-PORT=5000
-ADMIN_EMAIL=admin@test.com
-ADMIN_DEFAULT_PASSWORD=admin123
-```
+
 
 > **Not:** `GEMINI_API_KEY` belirtilmezse AI analizi fallback (kural tabanlı) moda geçer ve uygulama çalışmaya devam eder.
 
